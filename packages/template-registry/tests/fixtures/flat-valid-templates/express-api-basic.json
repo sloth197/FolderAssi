@@ -1,0 +1,34 @@
+{
+  "id": "express-api-basic",
+  "name": "Express API Basic",
+  "description": "Minimal API scaffold",
+  "language": "JavaScript",
+  "framework": "Express",
+  "templateVersion": "1.0.0",
+  "tags": ["api", "express"],
+  "defaultVariables": {
+    "projectName": "express-api-basic"
+  },
+  "requiredVariables": ["projectName"],
+  "options": [
+    {
+      "key": "includeDocker",
+      "label": "Include Docker",
+      "type": "boolean",
+      "default": false
+    }
+  ],
+  "root": {
+    "name": "{{projectName}}",
+    "type": "folder",
+    "overwritePolicy": "error",
+    "children": [
+      {
+        "name": "README.md",
+        "type": "file",
+        "contentTemplate": "# {{projectName}}",
+        "overwritePolicy": "overwrite"
+      }
+    ]
+  }
+}

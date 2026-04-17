@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1.0",
+  "id": "nextjs-saas-basic",
+  "version": "1.0.0",
+  "name": "Next.js SaaS Basic",
+  "description": "Dashboard scaffold",
+  "variables": {
+    "projectName": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "options": {
+    "includeAuth": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "nodes": [
+    {
+      "kind": "dir",
+      "path": "src"
+    }
+  ]
+}

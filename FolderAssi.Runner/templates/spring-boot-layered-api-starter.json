@@ -1,0 +1,99 @@
+{
+  "id": "spring-boot-layered-api-starter",
+  "name": "Spring Boot Layered API Starter",
+  "description": "Spring Boot layered API template with controller, service, repository, and optional auth package.",
+  "language": "Java",
+  "framework": "Spring Boot",
+  "templateVersion": "1.0.0",
+  "tags": ["backend", "api", "spring", "java", "auth"],
+  "defaultVariables": {
+    "projectName": "folderassi-api",
+    "packageName": "com.folderassi.api"
+  },
+  "requiredVariables": ["projectName", "packageName"],
+  "options": [
+    {
+      "key": "includeAuth",
+      "label": "Include Auth",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "key": "includeSwagger",
+      "label": "Include Swagger",
+      "type": "boolean",
+      "default": true
+    }
+  ],
+  "root": {
+    "name": "{{projectName}}",
+    "type": "folder",
+    "children": [
+      {
+        "name": "src",
+        "type": "folder",
+        "children": [
+          {
+            "name": "main",
+            "type": "folder",
+            "children": [
+              {
+                "name": "java",
+                "type": "folder",
+                "children": [
+                  {
+                    "name": "Application.java",
+                    "type": "file",
+                    "contentTemplate": "package {{packageName}};\n\npublic class Application {\n    public static void main(String[] args) {\n    }\n}\n",
+                    "encoding": "utf-8",
+                    "overwritePolicy": "overwrite",
+                    "isBinary": false
+                  },
+                  {
+                    "name": "auth",
+                    "type": "folder",
+                    "optional": true,
+                    "conditionKey": "includeAuth",
+                    "children": [
+                      {
+                        "name": "JwtAuthFilter.java",
+                        "type": "file",
+                        "contentTemplate": "package {{packageName}}.auth;\n\npublic class JwtAuthFilter {\n}\n",
+                        "encoding": "utf-8",
+                        "overwritePolicy": "overwrite",
+                        "isBinary": false
+                      }
+                    ],
+                    "encoding": "utf-8",
+                    "overwritePolicy": "error",
+                    "isBinary": false
+                  }
+                ],
+                "encoding": "utf-8",
+                "overwritePolicy": "error",
+                "isBinary": false
+              }
+            ],
+            "encoding": "utf-8",
+            "overwritePolicy": "error",
+            "isBinary": false
+          }
+        ],
+        "encoding": "utf-8",
+        "overwritePolicy": "error",
+        "isBinary": false
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "contentTemplate": "# {{projectName}}\n\nPackage: {{packageName}}\n",
+        "encoding": "utf-8",
+        "overwritePolicy": "overwrite",
+        "isBinary": false
+      }
+    ],
+    "encoding": "utf-8",
+    "overwritePolicy": "error",
+    "isBinary": false
+  }
+}

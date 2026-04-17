@@ -1,0 +1,244 @@
+{
+  "id": "react-feature-based-starter",
+  "name": "React Feature-Based Starter",
+  "description": "React application scaffold organized by app, pages, features, and shared layers.",
+  "language": "TypeScript",
+  "framework": "React",
+  "templateVersion": "1.0.0",
+  "tags": ["react", "frontend", "feature-based", "vite", "typescript"],
+  "defaultVariables": {
+    "projectName": "feature-react-app",
+    "appTitle": "Feature React App"
+  },
+  "requiredVariables": [
+    "projectName",
+    "appTitle"
+  ],
+  "options": [
+    {
+      "key": "includeRouter",
+      "label": "Include Router",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "key": "includeTesting",
+      "label": "Include Test Setup",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "key": "styling",
+      "label": "Styling Strategy",
+      "type": "string",
+      "default": "css-modules"
+    }
+  ],
+  "root": {
+    "name": "{{projectName}}",
+    "type": "folder",
+    "overwritePolicy": "error",
+    "children": [
+      {
+        "name": "README.md",
+        "type": "file",
+        "contentTemplate": "# {{appTitle}}\n\nReact feature-based starter scaffold.\n",
+        "encoding": "utf8",
+        "overwritePolicy": "overwrite"
+      },
+      {
+        "name": "package.json",
+        "type": "file",
+        "contentTemplate": "{\n  \"name\": \"{{projectName}}\",\n  \"private\": true,\n  \"version\": \"0.1.0\",\n  \"type\": \"module\",\n  \"scripts\": {\n    \"dev\": \"vite\",\n    \"build\": \"tsc && vite build\",\n    \"preview\": \"vite preview\"\n  }\n}\n",
+        "encoding": "utf8",
+        "overwritePolicy": "overwrite"
+      },
+      {
+        "name": "tsconfig.json",
+        "type": "file",
+        "contentTemplate": "{\n  \"compilerOptions\": {\n    \"target\": \"ES2020\",\n    \"module\": \"ESNext\",\n    \"jsx\": \"react-jsx\",\n    \"strict\": true\n  }\n}\n",
+        "encoding": "utf8",
+        "overwritePolicy": "overwrite"
+      },
+      {
+        "name": "vite.config.ts",
+        "type": "file",
+        "contentTemplate": "import { defineConfig } from 'vite';\nimport react from '@vitejs/plugin-react';\n\nexport default defineConfig({\n  plugins: [react()],\n});\n",
+        "encoding": "utf8",
+        "overwritePolicy": "overwrite"
+      },
+      {
+        "name": "index.html",
+        "type": "file",
+        "contentTemplate": "<!doctype html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n    <title>{{appTitle}}</title>\n  </head>\n  <body>\n    <div id=\"root\"></div>\n    <script type=\"module\" src=\"/src/main.tsx\"></script>\n  </body>\n</html>\n",
+        "encoding": "utf8",
+        "overwritePolicy": "overwrite"
+      },
+      {
+        "name": "src",
+        "type": "folder",
+        "overwritePolicy": "error",
+        "children": [
+          {
+            "name": "main.tsx",
+            "type": "file",
+            "contentTemplate": "import React from 'react';\nimport ReactDOM from 'react-dom/client';\nimport { App } from './app/App';\nimport './app/styles/global.css';\n\nReactDOM.createRoot(document.getElementById('root')!).render(\n  <React.StrictMode>\n    <App />\n  </React.StrictMode>,\n);\n",
+            "encoding": "utf8",
+            "overwritePolicy": "overwrite"
+          },
+          {
+            "name": "app",
+            "type": "folder",
+            "overwritePolicy": "error",
+            "children": [
+              {
+                "name": "App.tsx",
+                "type": "file",
+                "contentTemplate": "import { HomePage } from '../pages/HomePage';\n\nexport function App() {\n  return <HomePage />;\n}\n",
+                "encoding": "utf8",
+                "overwritePolicy": "overwrite"
+              },
+              {
+                "name": "providers",
+                "type": "folder",
+                "overwritePolicy": "error",
+                "children": [
+                  {
+                    "name": "RouterProvider.tsx",
+                    "type": "file",
+                    "contentTemplate": "export function RouterProvider({ children }: { children: React.ReactNode }) {\n  return <>{children}</>;\n}\n",
+                    "optional": true,
+                    "conditionKey": "includeRouter",
+                    "encoding": "utf8",
+                    "overwritePolicy": "overwrite"
+                  }
+                ]
+              },
+              {
+                "name": "styles",
+                "type": "folder",
+                "overwritePolicy": "error",
+                "children": [
+                  {
+                    "name": "global.css",
+                    "type": "file",
+                    "contentTemplate": ":root {\n  font-family: 'Segoe UI', sans-serif;\n  color: #1f2933;\n  background: #f4f7fb;\n}\nbody {\n  margin: 0;\n}\n",
+                    "encoding": "utf8",
+                    "overwritePolicy": "overwrite"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "pages",
+            "type": "folder",
+            "overwritePolicy": "error",
+            "children": [
+              {
+                "name": "HomePage.tsx",
+                "type": "file",
+                "contentTemplate": "import { AuthGate } from '../features/auth/ui/AuthGate';\n\nexport function HomePage() {\n  return <AuthGate />;\n}\n",
+                "encoding": "utf8",
+                "overwritePolicy": "overwrite"
+              }
+            ]
+          },
+          {
+            "name": "features",
+            "type": "folder",
+            "overwritePolicy": "error",
+            "children": [
+              {
+                "name": "auth",
+                "type": "folder",
+                "overwritePolicy": "error",
+                "children": [
+                  {
+                    "name": "ui",
+                    "type": "folder",
+                    "overwritePolicy": "error",
+                    "children": [
+                      {
+                        "name": "AuthGate.tsx",
+                        "type": "file",
+                        "contentTemplate": "import { Button } from '../../../shared/ui/Button';\n\nexport function AuthGate() {\n  return (\n    <main>\n      <h1>{{appTitle}}</h1>\n      <Button>Sign in</Button>\n    </main>\n  );\n}\n",
+                        "encoding": "utf8",
+                        "overwritePolicy": "overwrite"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "model",
+                    "type": "folder",
+                    "overwritePolicy": "error",
+                    "children": [
+                      {
+                        "name": "useAuth.ts",
+                        "type": "file",
+                        "contentTemplate": "export function useAuth() {\n  return { isAuthenticated: false };\n}\n",
+                        "encoding": "utf8",
+                        "overwritePolicy": "overwrite"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "shared",
+            "type": "folder",
+            "overwritePolicy": "error",
+            "children": [
+              {
+                "name": "ui",
+                "type": "folder",
+                "overwritePolicy": "error",
+                "children": [
+                  {
+                    "name": "Button.tsx",
+                    "type": "file",
+                    "contentTemplate": "import type { PropsWithChildren } from 'react';\n\nexport function Button({ children }: PropsWithChildren) {\n  return <button>{children}</button>;\n}\n",
+                    "encoding": "utf8",
+                    "overwritePolicy": "overwrite"
+                  }
+                ]
+              },
+              {
+                "name": "lib",
+                "type": "folder",
+                "overwritePolicy": "error",
+                "children": [
+                  {
+                    "name": "classNames.ts",
+                    "type": "file",
+                    "contentTemplate": "export function classNames(...values: Array<string | false | null | undefined>) {\n  return values.filter(Boolean).join(' ');\n}\n",
+                    "encoding": "utf8",
+                    "overwritePolicy": "overwrite"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "test",
+            "type": "folder",
+            "optional": true,
+            "conditionKey": "includeTesting",
+            "overwritePolicy": "error",
+            "children": [
+              {
+                "name": "setup.ts",
+                "type": "file",
+                "contentTemplate": "import '@testing-library/jest-dom';\n",
+                "encoding": "utf8",
+                "overwritePolicy": "overwrite"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

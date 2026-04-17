@@ -1,0 +1,81 @@
+{
+  "id": "aspnetcore-webapi-starter",
+  "name": "ASP.NET Core Web API Starter",
+  "description": "ASP.NET Core Web API starter template with controllers, models, and optional auth support.",
+  "language": "C#",
+  "framework": "ASP.NET Core",
+  "templateVersion": "1.0.0",
+  "tags": ["backend", "api", "aspnetcore", "webapi", "auth"],
+  "defaultVariables": {
+    "projectName": "FolderAssi.Api",
+    "namespace": "FolderAssi.Api"
+  },
+  "requiredVariables": ["projectName", "namespace"],
+  "options": [
+    {
+      "key": "includeAuth",
+      "label": "Include Auth",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "key": "includeSwagger",
+      "label": "Include Swagger",
+      "type": "boolean",
+      "default": true
+    }
+  ],
+  "root": {
+    "name": "{{projectName}}",
+    "type": "folder",
+    "children": [
+      {
+        "name": "Controllers",
+        "type": "folder",
+        "children": [
+          {
+            "name": "WeatherForecastController.cs",
+            "type": "file",
+            "contentTemplate": "namespace {{namespace}}.Controllers;\n\npublic sealed class WeatherForecastController\n{\n}\n",
+            "encoding": "utf-8",
+            "overwritePolicy": "overwrite",
+            "isBinary": false
+          }
+        ],
+        "encoding": "utf-8",
+        "overwritePolicy": "error",
+        "isBinary": false
+      },
+      {
+        "name": "Auth",
+        "type": "folder",
+        "optional": true,
+        "conditionKey": "includeAuth",
+        "children": [
+          {
+            "name": "JwtTokenService.cs",
+            "type": "file",
+            "contentTemplate": "namespace {{namespace}}.Auth;\n\npublic sealed class JwtTokenService\n{\n}\n",
+            "encoding": "utf-8",
+            "overwritePolicy": "overwrite",
+            "isBinary": false
+          }
+        ],
+        "encoding": "utf-8",
+        "overwritePolicy": "error",
+        "isBinary": false
+      },
+      {
+        "name": "Program.cs",
+        "type": "file",
+        "contentTemplate": "var builder = WebApplication.CreateBuilder(args);\n\nbuilder.Services.AddControllers();\nif (true)\n{\n    builder.Services.AddEndpointsApiExplorer();\n}\n\nvar app = builder.Build();\napp.MapControllers();\napp.Run();\n",
+        "encoding": "utf-8",
+        "overwritePolicy": "overwrite",
+        "isBinary": false
+      }
+    ],
+    "encoding": "utf-8",
+    "overwritePolicy": "error",
+    "isBinary": false
+  }
+}

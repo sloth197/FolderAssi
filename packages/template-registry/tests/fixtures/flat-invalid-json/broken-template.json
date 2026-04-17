@@ -1,0 +1,8 @@
+{
+  "id": "broken-template",
+  "name": "Broken Template",
+  "templateVersion": "1.0.0",
+  "root": {
+    "name": "broken-root",
+    "type": "folder"
+  }

@@ -1,0 +1,253 @@
+{
+  "id": "spring-boot-layered-api-starter",
+  "name": "Spring Boot Layered API Starter",
+  "description": "Layered Spring Boot REST API scaffold with controller, service, repository, dto, and config packages.",
+  "language": "Java",
+  "framework": "Spring Boot",
+  "templateVersion": "1.0.0",
+  "tags": ["java", "spring-boot", "api", "layered", "backend"],
+  "defaultVariables": {
+    "projectName": "order-service",
+    "groupId": "com.example",
+    "artifactId": "order-service",
+    "packageRoot": "com",
+    "packageDomain": "example",
+    "packageName": "orders",
+    "javaVersion": "21"
+  },
+  "requiredVariables": [
+    "projectName",
+    "groupId",
+    "artifactId",
+    "packageRoot",
+    "packageDomain",
+    "packageName"
+  ],
+  "options": [
+    {
+      "key": "includeDocker",
+      "label": "Include Dockerfile",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "key": "includeSwagger",
+      "label": "Enable Swagger",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "key": "buildTool",
+      "label": "Build Tool",
+      "type": "string",
+      "default": "maven"
+    }
+  ],
+  "root": {
+    "name": "{{projectName}}",
+    "type": "folder",
+    "overwritePolicy": "error",
+    "children": [
+      {
+        "name": "README.md",
+        "type": "file",
+        "contentTemplate": "# {{projectName}}\n\nSpring Boot layered API starter scaffold.\n",
+        "encoding": "utf8",
+        "overwritePolicy": "overwrite"
+      },
+      {
+        "name": "pom.xml",
+        "type": "file",
+        "contentTemplate": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n  <modelVersion>4.0.0</modelVersion>\n  <groupId>{{groupId}}</groupId>\n  <artifactId>{{artifactId}}</artifactId>\n  <version>0.0.1-SNAPSHOT</version>\n  <name>{{projectName}}</name>\n  <properties>\n    <java.version>{{javaVersion}}</java.version>\n  </properties>\n</project>\n",
+        "encoding": "utf8",
+        "overwritePolicy": "overwrite"
+      },
+      {
+        "name": "src",
+        "type": "folder",
+        "overwritePolicy": "error",
+        "children": [
+          {
+            "name": "main",
+            "type": "folder",
+            "overwritePolicy": "error",
+            "children": [
+              {
+                "name": "java",
+                "type": "folder",
+                "overwritePolicy": "error",
+                "children": [
+                  {
+                    "name": "{{packageRoot}}",
+                    "type": "folder",
+                    "overwritePolicy": "error",
+                    "children": [
+                      {
+                        "name": "{{packageDomain}}",
+                        "type": "folder",
+                        "overwritePolicy": "error",
+                        "children": [
+                          {
+                            "name": "{{packageName}}",
+                            "type": "folder",
+                            "overwritePolicy": "error",
+                            "children": [
+                              {
+                                "name": "Application.java",
+                                "type": "file",
+                                "contentTemplate": "package {{packageRoot}}.{{packageDomain}}.{{packageName}};\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\n\n@SpringBootApplication\npublic class Application {\n  public static void main(String[] args) {\n    SpringApplication.run(Application.class, args);\n  }\n}\n",
+                                "encoding": "utf8",
+                                "overwritePolicy": "overwrite"
+                              },
+                              {
+                                "name": "controller",
+                                "type": "folder",
+                                "overwritePolicy": "error",
+                                "children": [
+                                  {
+                                    "name": "HealthController.java",
+                                    "type": "file",
+                                    "contentTemplate": "package {{packageRoot}}.{{packageDomain}}.{{packageName}}.controller;\n\nimport {{packageRoot}}.{{packageDomain}}.{{packageName}}.dto.HealthResponse;\nimport {{packageRoot}}.{{packageDomain}}.{{packageName}}.service.HealthService;\nimport org.springframework.web.bind.annotation.GetMapping;\nimport org.springframework.web.bind.annotation.RequestMapping;\nimport org.springframework.web.bind.annotation.RestController;\n\n@RestController\n@RequestMapping(\"/api/health\")\npublic class HealthController {\n  private final HealthService healthService;\n\n  public HealthController(HealthService healthService) {\n    this.healthService = healthService;\n  }\n\n  @GetMapping\n  public HealthResponse getHealth() {\n    return healthService.getHealth();\n  }\n}\n",
+                                    "encoding": "utf8",
+                                    "overwritePolicy": "overwrite"
+                                  }
+                                ]
+                              },
+                              {
+                                "name": "service",
+                                "type": "folder",
+                                "overwritePolicy": "error",
+                                "children": [
+                                  {
+                                    "name": "HealthService.java",
+                                    "type": "file",
+                                    "contentTemplate": "package {{packageRoot}}.{{packageDomain}}.{{packageName}}.service;\n\nimport {{packageRoot}}.{{packageDomain}}.{{packageName}}.dto.HealthResponse;\nimport org.springframework.stereotype.Service;\n\n@Service\npublic class HealthService {\n  public HealthResponse getHealth() {\n    return new HealthResponse(\"UP\");\n  }\n}\n",
+                                    "encoding": "utf8",
+                                    "overwritePolicy": "overwrite"
+                                  }
+                                ]
+                              },
+                              {
+                                "name": "repository",
+                                "type": "folder",
+                                "overwritePolicy": "error",
+                                "children": [
+                                  {
+                                    "name": "HealthRepository.java",
+                                    "type": "file",
+                                    "contentTemplate": "package {{packageRoot}}.{{packageDomain}}.{{packageName}}.repository;\n\npublic interface HealthRepository {\n}\n",
+                                    "encoding": "utf8",
+                                    "overwritePolicy": "overwrite"
+                                  }
+                                ]
+                              },
+                              {
+                                "name": "dto",
+                                "type": "folder",
+                                "overwritePolicy": "error",
+                                "children": [
+                                  {
+                                    "name": "HealthResponse.java",
+                                    "type": "file",
+                                    "contentTemplate": "package {{packageRoot}}.{{packageDomain}}.{{packageName}}.dto;\n\npublic record HealthResponse(String status) {\n}\n",
+                                    "encoding": "utf8",
+                                    "overwritePolicy": "overwrite"
+                                  }
+                                ]
+                              },
+                              {
+                                "name": "config",
+                                "type": "folder",
+                                "overwritePolicy": "error",
+                                "children": [
+                                  {
+                                    "name": "OpenApiConfig.java",
+                                    "type": "file",
+                                    "contentTemplate": "package {{packageRoot}}.{{packageDomain}}.{{packageName}}.config;\n\npublic class OpenApiConfig {\n}\n",
+                                    "optional": true,
+                                    "conditionKey": "includeSwagger",
+                                    "encoding": "utf8",
+                                    "overwritePolicy": "overwrite"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "resources",
+                "type": "folder",
+                "overwritePolicy": "error",
+                "children": [
+                  {
+                    "name": "application.yml",
+                    "type": "file",
+                    "contentTemplate": "spring:\n  application:\n    name: {{artifactId}}\nserver:\n  port: 8080\n",
+                    "encoding": "utf8",
+                    "overwritePolicy": "overwrite"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "test",
+            "type": "folder",
+            "overwritePolicy": "error",
+            "children": [
+              {
+                "name": "java",
+                "type": "folder",
+                "overwritePolicy": "error",
+                "children": [
+                  {
+                    "name": "{{packageRoot}}",
+                    "type": "folder",
+                    "overwritePolicy": "error",
+                    "children": [
+                      {
+                        "name": "{{packageDomain}}",
+                        "type": "folder",
+                        "overwritePolicy": "error",
+                        "children": [
+                          {
+                            "name": "{{packageName}}",
+                            "type": "folder",
+                            "overwritePolicy": "error",
+                            "children": [
+                              {
+                                "name": "ApplicationTests.java",
+                                "type": "file",
+                                "contentTemplate": "package {{packageRoot}}.{{packageDomain}}.{{packageName}};\n\nimport org.junit.jupiter.api.Test;\nimport org.springframework.boot.test.context.SpringBootTest;\n\n@SpringBootTest\nclass ApplicationTests {\n  @Test\n  void contextLoads() {\n  }\n}\n",
+                                "encoding": "utf8",
+                                "overwritePolicy": "overwrite"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Dockerfile",
+        "type": "file",
+        "contentTemplate": "FROM eclipse-temurin:{{javaVersion}}-jre\nWORKDIR /app\nCOPY target/{{artifactId}}-0.0.1-SNAPSHOT.jar app.jar\nENTRYPOINT [\"java\", \"-jar\", \"/app/app.jar\"]\n",
+        "optional": true,
+        "conditionKey": "includeDocker",
+        "encoding": "utf8",
+        "overwritePolicy": "overwrite"
+      }
+    ]
+  }
+}

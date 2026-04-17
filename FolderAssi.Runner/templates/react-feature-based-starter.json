@@ -1,0 +1,99 @@
+{
+  "id": "react-feature-based-starter",
+  "name": "React Feature Based Starter",
+  "description": "React feature-based starter template with app, features, shared, and optional auth feature.",
+  "language": "TypeScript",
+  "framework": "React",
+  "templateVersion": "1.0.0",
+  "tags": ["frontend", "react", "typescript", "feature-based", "auth"],
+  "defaultVariables": {
+    "projectName": "folderassi-web",
+    "namespace": "folderassi-web"
+  },
+  "requiredVariables": ["projectName", "namespace"],
+  "options": [
+    {
+      "key": "includeAuth",
+      "label": "Include Auth",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "key": "includeRouter",
+      "label": "Include Router",
+      "type": "boolean",
+      "default": true
+    }
+  ],
+  "root": {
+    "name": "{{projectName}}",
+    "type": "folder",
+    "children": [
+      {
+        "name": "src",
+        "type": "folder",
+        "children": [
+          {
+            "name": "app",
+            "type": "folder",
+            "children": [
+              {
+                "name": "App.tsx",
+                "type": "file",
+                "contentTemplate": "export function App() {\n  return <div>{{namespace}}</div>;\n}\n",
+                "encoding": "utf-8",
+                "overwritePolicy": "overwrite",
+                "isBinary": false
+              }
+            ],
+            "encoding": "utf-8",
+            "overwritePolicy": "error",
+            "isBinary": false
+          },
+          {
+            "name": "features",
+            "type": "folder",
+            "children": [
+              {
+                "name": "auth",
+                "type": "folder",
+                "optional": true,
+                "conditionKey": "includeAuth",
+                "children": [
+                  {
+                    "name": "AuthGate.tsx",
+                    "type": "file",
+                    "contentTemplate": "export function AuthGate() {\n  return <section>{{projectName}} auth</section>;\n}\n",
+                    "encoding": "utf-8",
+                    "overwritePolicy": "overwrite",
+                    "isBinary": false
+                  }
+                ],
+                "encoding": "utf-8",
+                "overwritePolicy": "error",
+                "isBinary": false
+              }
+            ],
+            "encoding": "utf-8",
+            "overwritePolicy": "error",
+            "isBinary": false
+          }
+        ],
+        "encoding": "utf-8",
+        "overwritePolicy": "error",
+        "isBinary": false
+      },
+      {
+        "name": "package.json",
+        "type": "file",
+        "contentTemplate": "{\n  \"name\": \"{{projectName}}\",\n  \"version\": \"0.1.0\"\n}\n",
+        "encoding": "utf-8",
+        "overwritePolicy": "overwrite",
+        "isBinary": false
+      }
+    ],
+    "encoding": "utf-8",
+    "overwritePolicy": "error",
+    "isBinary": false
+  }
+}

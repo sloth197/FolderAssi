@@ -1,0 +1,65 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <EnableDefaultNoneItems>false</EnableDefaultNoneItems>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="artifacts\**\*.cs" />
+    <Compile Remove="generated\**\*.cs" />
+    <Compile Remove="archives\**\*.cs" />
+
+    <Compile Include="..\Domain\Templates\ProjectTemplate.cs"                     Link="Domain\Templates\ProjectTemplate.cs" />
+    <Compile Include="..\Domain\Templates\TemplateNode.cs"                        Link="Domain\Templates\TemplateNode.cs" />
+    <Compile Include="..\Domain\Templates\TemplateOption.cs"                      Link="Domain\Templates\TemplateOption.cs" />
+    <Compile Include="..\Domain\Templates\TemplateNodeType.cs"                    Link="Domain\Templates\TemplateNodeType.cs" />
+    <Compile Include="..\Domain\Validation\ValidationError.cs"                    Link="Domain\Validation\ValidationError.cs" />
+    <Compile Include="..\Domain\Validation\ValidationResult.cs"                   Link="Domain\Validation\ValidationResult.cs" />
+    <Compile Include="..\Domain\Ai\TemplateCandidate.cs"                          Link="Domain\Ai\TemplateCandidate.cs" />
+    <Compile Include="..\Domain\Ai\TemplateRecommendationRequest.cs"              Link="Domain\Ai\TemplateRecommendationRequest.cs" />
+    <Compile Include="..\Domain\Ai\TemplateRecommendationResult.cs"               Link="Domain\Ai\TemplateRecommendationResult.cs" />
+    <Compile Include="..\Domain\Ai\CandidateFilterRequest.cs"                     Link="Domain\Ai\CandidateFilterRequest.cs" />
+    <Compile Include="..\Domain\Ai\CandidateFilterResult.cs"                      Link="Domain\Ai\CandidateFilterResult.cs" />
+    <Compile Include="..\Domain\Ai\TemplateRecommendationOrchestrationResult.cs"  Link="Domain\Ai\TemplateRecommendationOrchestrationResult.cs" />
+    <Compile Include="..\Application\Ai\IAiTemplateRecommender.cs"                Link="Application\Ai\IAiTemplateRecommender.cs" />
+    <Compile Include="..\Application\Ai\IAiOutputValidator.cs"                    Link="Application\Ai\IAiOutputValidator.cs" />
+    <Compile Include="..\Application\Ai\ITemplateCandidateFilter.cs"              Link="Application\Ai\ITemplateCandidateFilter.cs" />
+    <Compile Include="..\Application\Ai\ITemplateRecommendationOrchestrator.cs"   Link="Application\Ai\ITemplateRecommendationOrchestrator.cs" />
+    <Compile Include="..\Application\Templates\ITemplateLoader.cs"                Link="Application\Templates\ITemplateLoader.cs" />
+    <Compile Include="..\Application\Templates\ITemplateValidator.cs"             Link="Application\Templates\ITemplateValidator.cs" />
+    <Compile Include="..\Application\Templates\IVariableResolver.cs"              Link="Application\Templates\IVariableResolver.cs" />
+    <Compile Include="..\Application\Templates\ITemplateRenderer.cs"              Link="Application\Templates\ITemplateRenderer.cs" />
+    <Compile Include="..\Application\Scaffolding\IScaffoldBuilder.cs"             Link="Application\Scaffolding\IScaffoldBuilder.cs" />
+    <Compile Include="..\Application\Scaffolding\IArchiveService.cs"              Link="Application\Scaffolding\IArchiveService.cs" />
+    <Compile Include="..\Infrastructure\Templates\JsonTemplateLoader.cs"          Link="Infrastructure\Templates\JsonTemplateLoader.cs" />
+    <Compile Include="..\Infrastructure\Templates\TemplateValidator.cs"           Link="Infrastructure\Templates\TemplateValidator.cs" />
+    <Compile Include="..\Infrastructure\Templates\VariableResolver.cs"            Link="Infrastructure\Templates\VariableResolver.cs" />
+    <Compile Include="..\Infrastructure\Templates\TemplateRenderer.cs"            Link="Infrastructure\Templates\TemplateRenderer.cs" />
+    <Compile Include="..\Infrastructure\Ai\TemplateCandidateFilter.cs"            Link="Infrastructure\Ai\TemplateCandidateFilter.cs" />
+    <Compile Include="..\Infrastructure\Ai\AiPromptBuilder.cs"                    Link="Infrastructure\Ai\AiPromptBuilder.cs" />
+    <Compile Include="..\Infrastructure\Ai\AiRecommendationParser.cs"             Link="Infrastructure\Ai\AiRecommendationParser.cs" />
+    <Compile Include="..\Infrastructure\Ai\AiOutputValidator.cs"                  Link="Infrastructure\Ai\AiOutputValidator.cs" />
+    <Compile Include="..\Infrastructure\Ai\MockAiTemplateRecommender.cs"          Link="Infrastructure\Ai\MockAiTemplateRecommender.cs" />
+    <Compile Include="..\Infrastructure\Ai\OpenAiRecommendationOptions.cs"        Link="Infrastructure\Ai\OpenAiRecommendationOptions.cs" />
+    <Compile Include="..\Infrastructure\Ai\OpenAiTemplateRecommender.cs"          Link="Infrastructure\Ai\OpenAiTemplateRecommender.cs" />
+    <Compile Include="..\Infrastructure\Ai\TemplateRecommendationOrchestrator.cs" Link="Infrastructure\Ai\TemplateRecommendationOrchestrator.cs" />
+    <Compile Include="..\Infrastructure\Scaffolding\FileSystemScaffoldBuilder.cs" Link="Infrastructure\Scaffolding\FileSystemScaffoldBuilder.cs" />
+    <Compile Include="..\Infrastructure\Scaffolding\ZipArchiveService.cs"         Link="Infrastructure\Scaffolding\ZipArchiveService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="templates\**\*.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="ui\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

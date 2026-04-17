@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1.0",
+  "id": "express-api-basic",
+  "version": "1.0.0",
+  "name": "Express API Basic",
+  "description": "Minimal API scaffold",
+  "variables": {
+    "projectName": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "options": {
+    "includeDocker": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "nodes": [
+    {
+      "kind": "dir",
+      "path": "src"
+    }
+  ]
+}

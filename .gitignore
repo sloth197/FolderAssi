@@ -1,0 +1,35 @@
+# IDE
+.vs/
+.vscode/
+
+# Build outputs
+**/bin/
+**/obj/
+**/TestResults/
+**/coverage/
+
+# Node modules
+**/node_modules/
+
+# Generated/runtime artifacts
+artifacts/
+FolderAssi.Runner/artifacts/
+FolderAssi.Runner/archives/
+FolderAssi.Runner/generated/
+*.zip
+
+# Local settings and secrets
+.env
+.env.*
+settings.json
+generation-history.json
+appsettings.Local.json
+
+# Temp files
+.tmp_remote/
+*.tmp
+*.log
+
+# OS files
+Thumbs.db
+.DS_Store

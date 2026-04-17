@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FolderAssi UI</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="bg-orb orb-a"></div>
+  <div class="bg-orb orb-b"></div>
+
+  <main class="layout">
+    <header class="hero">
+      <h1>FOLDER ASSISTANCE</h1>
+    </header>
+
+    <section class="card unified-section">
+      <div class="section-block settings-block">
+        <h2>설정</h2>
+        <div class="grid-two">
+          <div class="field">
+            <label for="openAiApiKeyInput">API Key</label>
+            <input id="openAiApiKeyInput" type="password" placeholder="새 API Key 입력(비우면 기존 유지)">
+          </div>
+          <div class="field">
+            <label for="modelInput">Model</label>
+            <input id="modelInput" type="text" placeholder="예: gpt-4o-mini">
+          </div>
+        </div>
+        <div class="field">
+          <label for="openAiEndpointInput">API Endpoint</label>
+          <input id="openAiEndpointInput" type="text" placeholder="예: https://openrouter.ai/api/v1/chat/completions">
+        </div>
+        <div class="grid-two">
+          <div class="field">
+            <label for="templatesPathInput">templates 폴더 경로</label>
+            <input id="templatesPathInput" type="text">
+          </div>
+          <div class="field">
+            <label for="outputPathInput">output 폴더 경로</label>
+            <input id="outputPathInput" type="text">
+          </div>
+        </div>
+        <div class="grid-two">
+          <div class="field">
+            <label for="zipPathInput">zip 저장 경로</label>
+            <input id="zipPathInput" type="text">
+          </div>
+          <div class="field">
+            <label for="aiModeSelect">Mock/Real AI 전환</label>
+            <select id="aiModeSelect">
+              <option value="mock">mock</option>
+              <option value="real">real</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <button id="saveSettingsBtn" class="btn btn-primary">설정 저장</button>
+          <button id="clearApiKeyBtn" class="btn">API Key 초기화</button>
+        </div>
+        <div id="settingsStatus" class="info">설정 로드 중...</div>
+      </div>
+
+      <div class="section-block command-block">
+        <h2>1) 명령어 입력</h2>
+        <textarea id="requestInput" rows="3" placeholder="예: 로그인 기능이 포함된 ASP.NET Core Web API 프로젝트를 만들고 싶어"></textarea>
+        <div class="row">
+          <button id="recommendBtn" class="btn btn-primary">생성</button>
+          <button id="savePromptBtn" class="btn">입력 저장</button>
+          <span id="policyBadge" class="badge">Policy: -</span>
+        </div>
+      </div>
+
+      <div class="section-block grid-two">
+        <div>
+          <h2>2) 후보 템플릿</h2>
+          <ul id="candidateList" class="list"></ul>
+        </div>
+        <div>
+          <h2>3) 결과</h2>
+          <div id="recommendationBox" class="info">추천 결과가 여기에 표시됩니다.</div>
+        </div>
+      </div>
+
+      <div class="section-block grid-two">
+        <div>
+          <h2>4) 변수 입력</h2>
+          <select id="templateSelect"></select>
+          <div class="row">
+            <button id="saveTemplateBtn" class="btn">템플릿 즐겨찾기</button>
+          </div>
+          <div class="quick-area">
+            <p class="quick-title">즐겨찾기 템플릿</p>
+            <div id="favoriteTemplateList" class="quick-list"></div>
+          </div>
+          <div id="variablesForm" class="form-grid"></div>
+        </div>
+        <div>
+          <h2>5) 옵션 입력</h2>
+          <div id="optionsForm" class="form-grid"></div>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <h2>6) 구조 미리보기</h2>
+        <div class="row">
+          <button id="previewBtn" class="btn">미리보기</button>
+          <button id="generateBtn" class="btn btn-primary">프로젝트 생성</button>
+        </div>
+        <pre id="treePreview" class="tree"></pre>
+      </div>
+
+      <div class="section-block">
+        <h2>7) 경로</h2>
+        <div id="resultPaths" class="info">생성 후 경로가 표시됩니다.</div>
+      </div>
+
+      <div class="section-block">
+        <h2>8) 생성 히스토리</h2>
+        <div class="row">
+          <button id="refreshHistoryBtn" class="btn">히스토리 새로고침</button>
+          <span class="muted">항목 클릭 시 입력값과 템플릿/변수/옵션이 복원됩니다.</span>
+        </div>
+        <ul id="historyList" class="history-list"></ul>
+        <div id="historyStatus" class="info">히스토리 로드 중...</div>
+      </div>
+    </section>
+  </main>
+
+  <script src="./preferences-service.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

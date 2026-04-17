@@ -1,0 +1,10 @@
+{
+  "id": "broken-template",
+  "name": "Broken Template",
+  "version": "1.0.0",
+  "nodes": [
+    {
+      "kind": "dir",
+      "path": "src"
+    }
+  ]

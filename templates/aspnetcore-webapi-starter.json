@@ -1,0 +1,191 @@
+{
+  "id": "aspnetcore-webapi-starter",
+  "name": "ASP.NET Core Web API Starter",
+  "description": "ASP.NET Core Web API scaffold with controllers, models, tests, and optional Docker support.",
+  "language": "C#",
+  "framework": "ASP.NET Core",
+  "templateVersion": "1.0.0",
+  "tags": ["csharp", "aspnetcore", "webapi", "backend"],
+  "defaultVariables": {
+    "projectName": "CatalogService",
+    "solutionName": "CatalogService",
+    "rootNamespace": "CatalogService",
+    "targetFramework": "net8.0"
+  },
+  "requiredVariables": [
+    "projectName",
+    "solutionName",
+    "rootNamespace"
+  ],
+  "options": [
+    {
+      "key": "includeDocker",
+      "label": "Include Dockerfile",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "key": "includeSwagger",
+      "label": "Include Swagger Docs",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "key": "useControllers",
+      "label": "Use Controllers",
+      "type": "boolean",
+      "default": true
+    }
+  ],
+  "root": {
+    "name": "{{projectName}}",
+    "type": "folder",
+    "overwritePolicy": "error",
+    "children": [
+      {
+        "name": "README.md",
+        "type": "file",
+        "contentTemplate": "# {{projectName}}\n\nASP.NET Core Web API starter scaffold.\n",
+        "encoding": "utf8",
+        "overwritePolicy": "overwrite"
+      },
+      {
+        "name": "{{solutionName}}.sln",
+        "type": "file",
+        "contentTemplate": "Microsoft Visual Studio Solution File, Format Version 12.00\n# Visual Studio Version 17\nProject(\"{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\") = \"{{projectName}}.Api\", \"src/{{projectName}}.Api/{{projectName}}.Api.csproj\", \"{00000000-0000-0000-0000-000000000001}\"\nEndProject\nGlobal\nEndGlobal\n",
+        "encoding": "utf8",
+        "overwritePolicy": "overwrite"
+      },
+      {
+        "name": "src",
+        "type": "folder",
+        "overwritePolicy": "error",
+        "children": [
+          {
+            "name": "{{projectName}}.Api",
+            "type": "folder",
+            "overwritePolicy": "error",
+            "children": [
+              {
+                "name": "{{projectName}}.Api.csproj",
+                "type": "file",
+                "contentTemplate": "<Project Sdk=\"Microsoft.NET.Sdk.Web\">\n  <PropertyGroup>\n    <TargetFramework>{{targetFramework}}</TargetFramework>\n    <Nullable>enable</Nullable>\n    <ImplicitUsings>enable</ImplicitUsings>\n    <RootNamespace>{{rootNamespace}}</RootNamespace>\n  </PropertyGroup>\n</Project>\n",
+                "encoding": "utf8",
+                "overwritePolicy": "overwrite"
+              },
+              {
+                "name": "Program.cs",
+                "type": "file",
+                "contentTemplate": "var builder = WebApplication.CreateBuilder(args);\n\nbuilder.Services.AddControllers();\nbuilder.Services.AddEndpointsApiExplorer();\nbuilder.Services.AddSwaggerGen();\n\nvar app = builder.Build();\n\napp.UseSwagger();\napp.UseSwaggerUI();\napp.UseHttpsRedirection();\napp.MapControllers();\napp.Run();\n",
+                "encoding": "utf8",
+                "overwritePolicy": "overwrite"
+              },
+              {
+                "name": "appsettings.json",
+                "type": "file",
+                "contentTemplate": "{\n  \"Logging\": {\n    \"LogLevel\": {\n      \"Default\": \"Information\",\n      \"Microsoft.AspNetCore\": \"Warning\"\n    }\n  },\n  \"AllowedHosts\": \"*\"\n}\n",
+                "encoding": "utf8",
+                "overwritePolicy": "overwrite"
+              },
+              {
+                "name": "Controllers",
+                "type": "folder",
+                "overwritePolicy": "error",
+                "children": [
+                  {
+                    "name": "WeatherForecastController.cs",
+                    "type": "file",
+                    "contentTemplate": "using Microsoft.AspNetCore.Mvc;\n\nnamespace {{rootNamespace}}.Controllers;\n\n[ApiController]\n[Route(\"api/[controller]\")]\npublic class WeatherForecastController : ControllerBase\n{\n    [HttpGet]\n    public IActionResult Get()\n    {\n        return Ok(new[] { new { Summary = \"Sunny\" } });\n    }\n}\n",
+                    "encoding": "utf8",
+                    "overwritePolicy": "overwrite"
+                  }
+                ]
+              },
+              {
+                "name": "Models",
+                "type": "folder",
+                "overwritePolicy": "error",
+                "children": [
+                  {
+                    "name": "WeatherForecast.cs",
+                    "type": "file",
+                    "contentTemplate": "namespace {{rootNamespace}}.Models;\n\npublic record WeatherForecast(DateOnly Date, int TemperatureC, string Summary);\n",
+                    "encoding": "utf8",
+                    "overwritePolicy": "overwrite"
+                  }
+                ]
+              },
+              {
+                "name": "Properties",
+                "type": "folder",
+                "overwritePolicy": "error",
+                "children": [
+                  {
+                    "name": "launchSettings.json",
+                    "type": "file",
+                    "contentTemplate": "{\n  \"$schema\": \"https://json.schemastore.org/launchsettings.json\",\n  \"profiles\": {\n    \"{{projectName}}.Api\": {\n      \"commandName\": \"Project\",\n      \"launchBrowser\": false,\n      \"applicationUrl\": \"https://localhost:7181;http://localhost:5181\",\n      \"environmentVariables\": {\n        \"ASPNETCORE_ENVIRONMENT\": \"Development\"\n      }\n    }\n  }\n}\n",
+                    "encoding": "utf8",
+                    "overwritePolicy": "overwrite"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "tests",
+        "type": "folder",
+        "overwritePolicy": "error",
+        "children": [
+          {
+            "name": "{{projectName}}.Api.Tests",
+            "type": "folder",
+            "overwritePolicy": "error",
+            "children": [
+              {
+                "name": "{{projectName}}.Api.Tests.csproj",
+                "type": "file",
+                "contentTemplate": "<Project Sdk=\"Microsoft.NET.Sdk\">\n  <PropertyGroup>\n    <TargetFramework>{{targetFramework}}</TargetFramework>\n    <IsPackable>false</IsPackable>\n  </PropertyGroup>\n</Project>\n",
+                "encoding": "utf8",
+                "overwritePolicy": "overwrite"
+              },
+              {
+                "name": "WeatherForecastControllerTests.cs",
+                "type": "file",
+                "contentTemplate": "namespace {{rootNamespace}}.Tests;\n\npublic class WeatherForecastControllerTests\n{\n    [Fact]\n    public void Placeholder()\n    {\n    }\n}\n",
+                "encoding": "utf8",
+                "overwritePolicy": "overwrite"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "docs",
+        "type": "folder",
+        "optional": true,
+        "conditionKey": "includeSwagger",
+        "overwritePolicy": "error",
+        "children": [
+          {
+            "name": "swagger.md",
+            "type": "file",
+            "contentTemplate": "# Swagger\n\nSwagger UI is enabled for {{projectName}}.\n",
+            "encoding": "utf8",
+            "overwritePolicy": "overwrite"
+          }
+        ]
+      },
+      {
+        "name": "Dockerfile",
+        "type": "file",
+        "contentTemplate": "FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base\nWORKDIR /app\nCOPY ./publish .\nENTRYPOINT [\"dotnet\", \"{{projectName}}.Api.dll\"]\n",
+        "optional": true,
+        "conditionKey": "includeDocker",
+        "encoding": "utf8",
+        "overwritePolicy": "overwrite"
+      }
+    ]
+  }
+}

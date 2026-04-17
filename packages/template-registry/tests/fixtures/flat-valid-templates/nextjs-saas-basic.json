@@ -1,0 +1,34 @@
+{
+  "id": "nextjs-saas-basic",
+  "name": "Next.js SaaS Basic",
+  "description": "Dashboard scaffold",
+  "language": "TypeScript",
+  "framework": "Next.js",
+  "templateVersion": "1.0.0",
+  "tags": ["web", "nextjs", "saas"],
+  "defaultVariables": {
+    "projectName": "nextjs-saas-basic"
+  },
+  "requiredVariables": ["projectName"],
+  "options": [
+    {
+      "key": "includeAuth",
+      "label": "Include Auth",
+      "type": "boolean",
+      "default": true
+    }
+  ],
+  "root": {
+    "name": "{{projectName}}",
+    "type": "folder",
+    "overwritePolicy": "error",
+    "children": [
+      {
+        "name": "README.md",
+        "type": "file",
+        "contentTemplate": "# {{projectName}}",
+        "overwritePolicy": "overwrite"
+      }
+    ]
+  }
+}
